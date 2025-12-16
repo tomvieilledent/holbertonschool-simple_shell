@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * main - Entry point for the simple shell program.
+ *
+ * Return: 0 on success, or another value on error.
+ */
 int main(void)
 {
 	char *lineprt = NULL;
@@ -12,11 +17,12 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("$ ");
+			write(STDOUT_FILENO, "$ ", 2);
 		r = getline(&lineprt, &n, stdin);
 		if (r == -1)
 		{
-			printf("\n");
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 2);
 			break;
 		}
 		if (r > 0 && lineprt[r - 1] == '\n')
