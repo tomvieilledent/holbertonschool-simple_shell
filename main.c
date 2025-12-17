@@ -17,11 +17,16 @@ int main(void)
 
 		r = read_line(&line, &n);
 		if (r == -1)
+		{
+			printf("vgvhuj");
 			break;
+		}
 
 		if (!clean_line(line, r))
+		{
+			free(line);
 			continue;
-
+		}
 		execute_command(line);
 	}
 

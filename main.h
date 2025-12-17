@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <ctype.h>
 
 void display_prompt(void);
 ssize_t read_line(char **line, size_t *n);
