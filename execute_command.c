@@ -13,7 +13,7 @@ void execute_command(char *line)
 	if (splitCommand(line, argv) == 0)
 		return;
 
-	if (strcasecmp(argv[0], "exit") == 0)
+	if (strcmp(argv[0], "exit") == 0)
 	{
 		free(line);
 		exit(0);
