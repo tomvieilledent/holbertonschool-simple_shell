@@ -25,7 +25,7 @@ int execute_command(char *line)
 	{
 		execve(argv[0], argv, NULL);
 		perror("Error");
-		exit(127);
+		exit(1);
 	}
 	else if (pid > 0)
 	{
@@ -34,6 +34,8 @@ int execute_command(char *line)
 			return (WEXITSTATUS(status));
 	}
 	else
+	{
 		perror("fork");
-	return (1);
+		return (1);
+	}
 }
