@@ -23,7 +23,7 @@ int execute_command(char *line)
 	if (strcmp(argv[0], "env") == 0)
 	{
 		handle_env();
-		return (0);
+		return (1);
 	}
 
 	pid = fork();
@@ -31,7 +31,7 @@ int execute_command(char *line)
 	{
 		execve(argv[0], argv, NULL);
 		perror("Error");
-		exit(1);
+		exit(127);
 	}
 	else if (pid > 0)
 	{
