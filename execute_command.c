@@ -16,14 +16,11 @@ int execute_command(char *line)
 		return (0);
 
 	if (strcmp(argv[0], "exit") == 0)
-	{
-		free(line);
-		exit(0);
-	}
+		return (-1);
 	if (strcmp(argv[0], "env") == 0)
 	{
 		handle_env();
-		return (1);
+		return (0);
 	}
 
 	pid = fork();

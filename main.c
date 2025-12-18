@@ -11,6 +11,7 @@ int main(void)
 	size_t n = 0;
 	ssize_t r;
 	int last_status = 0;
+	int ret;
 
 	signal(SIGINT, handle_sigint);
 
@@ -25,7 +26,13 @@ int main(void)
 		if (clean_line(line, r) == 0)
 			continue;
 
-		last_status = execute_command(line);
+		ret = execute_command(line);
+		if (ret == -1)
+		{
+			free(line);
+			return (last_status);
+		}
+		last_status = ret;
 	}
 
 	free(line);
