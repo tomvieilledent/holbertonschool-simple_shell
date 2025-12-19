@@ -19,5 +19,6 @@ void execute_command(char *line);
 int splitCommand(char *input, char **argv);
 void handle_sigint(int signal);
 void handle_env(void);
+char **get_path(void);
 
 #endif
