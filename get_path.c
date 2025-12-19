@@ -2,40 +2,46 @@
 
 /**
  * get_path - Retrieves and tokenizes the PATH environment variable.
+ * @envp: Environment variables.
  *
- * Return: NULL (currently prints PATH directories).
+ * Return: Array of PATH directories, or NULL on error.
  *
  * Description: This function searches for the PATH environment variable,
- *              tokenizes it by '=' and ':', and prints each directory.
+ *              tokenizes it by '=' and ':', and returns each directory.
  */
 
-char **get_path(void)
+char **get_path(char **envp)
 {
 
 	int i = 0, j = 0;
-	char *path_copy;
-	char *token;
-	char **tokens;
-	char *delimiters = "=:";
+	char *path_copy, *delimiters = "=:", *token, **tokens;
 
-	while (environ[i])
+	tokens = malloc(sizeof(char *) * 128);
+	if (tokens == NULL)
+		return (NULL);
+
+	while (envp[i])
 	{
-		if (strncmp(environ[i], "PATH=", 5) == 0)
+		if (strncmp(envp[i], "PATH=", 5) == 0)
 		{
-			path_copy = environ[i];
+			path_copy = strdup(envp[i]);
+			if (path_copy == NULL)
+			{
+				free(tokens);
+				return (NULL);
+			}
 			break;
 		}
 		i++;
 	}
+
 	token = strtok(path_copy, delimiters);
-
-	while (token != NULL)
+	while (token != NULL && j < 127)
 	{
-
 		token = strtok(NULL, delimiters);
 		tokens[j] = token;
-		printf("Dossier PATH : %s\n", tokens[j]);
 		j++;
 	}
+	tokens[j] = NULL;
 	return (tokens);
 }

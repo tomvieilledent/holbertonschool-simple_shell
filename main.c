@@ -2,14 +2,20 @@
 
 /**
  * main - Entry point for the simple shell program.
+ * @argc: Argument count (unused).
+ * @argv: Argument vector (unused).
+ * @envp: Environment variables.
  *
  * Return: 0 on success, or another value on error.
  */
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
 	char *line = NULL;
 	size_t n = 0;
 	ssize_t r;
+
+	(void)argc;
+	(void)argv;
 
 	signal(SIGINT, handle_sigint);
 
@@ -24,7 +30,7 @@ int main(void)
 		if (clean_line(line, r) == 0)
 			continue;
 
-		execute_command(line);
+		execute_command(line, envp);
 	}
 
 	free(line);
