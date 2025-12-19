@@ -12,10 +12,13 @@ void execute_command(char *line, char **envp)
 	char full_path[1024], *argv[1024], **paths;
 
 	if (splitCommand(line, argv) == 0)
-		return (0);
+		return;
 
 	if (strcmp(argv[0], "exit") == 0)
-		return (-1);
+	{
+		free(line);
+		exit(0);
+	}
 	if (strcmp(argv[0], "env") == 0)
 	{
 		handle_env(envp);

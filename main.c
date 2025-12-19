@@ -16,8 +16,6 @@ int main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	int last_status = 0;
-	int ret;
 
 	signal(SIGINT, handle_sigint);
 
@@ -33,15 +31,8 @@ int main(int argc, char **argv, char **envp)
 			continue;
 
 		execute_command(line, envp);
-		ret = execute_command(line);
-		if (ret == -1)
-		{
-			free(line);
-			return (last_status);
-		}
-		last_status = ret;
 	}
 
 	free(line);
-	return (last_status);
+	return (0);
 }
